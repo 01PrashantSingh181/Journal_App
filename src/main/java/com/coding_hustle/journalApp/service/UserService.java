@@ -34,6 +34,15 @@ public class UserService {
         userRepository.save(user);
 
     }
+    public void saveAdmin(User user) {
+//        String dbName = mongoTemplate.getDb().getName();
+//        System.out.println("🔥 DB USED = " + dbName);
+
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setRoles(Arrays.asList("USER","ADMIN"));
+        userRepository.save(user);
+
+    }
     public void saveUser(User user){
         userRepository.save(user);
     }
