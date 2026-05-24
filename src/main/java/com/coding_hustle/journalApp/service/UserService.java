@@ -4,7 +4,10 @@ import com.coding_hustle.journalApp.entity.JournalEntry;
 import com.coding_hustle.journalApp.entity.User;
 import com.coding_hustle.journalApp.repository.JournalEntryRepository;
 import com.coding_hustle.journalApp.repository.UserRepository;
+import lombok.extern.slf4j.XSlf4j;
 import org.bson.types.ObjectId;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -16,6 +19,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
+//@XSlf4j
 public class UserService {
     @Autowired
     private UserRepository userRepository;
@@ -24,7 +28,7 @@ public class UserService {
     private MongoTemplate mongoTemplate;
     @Autowired
     private PasswordEncoder passwordEncoder;
-
+    private static final Logger logger = LoggerFactory.getLogger(UserService.class);
     public void saveNewUser(User user) {
 //        String dbName = mongoTemplate.getDb().getName();
 //        System.out.println("🔥 DB USED = " + dbName);
@@ -32,6 +36,7 @@ public class UserService {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setRoles(Arrays.asList("USER"));
         userRepository.save(user);
+        logger.info("User created successfully named: {}",user.getUserName());
 
     }
     public void saveAdmin(User user) {

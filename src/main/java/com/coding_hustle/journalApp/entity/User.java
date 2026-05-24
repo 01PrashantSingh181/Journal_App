@@ -1,9 +1,6 @@
 package com.coding_hustle.journalApp.entity;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.Setter;
+import lombok.*;
 import org.apache.catalina.LifecycleState;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
@@ -18,6 +15,8 @@ import java.util.List;
 @Document(collection = "users")
 @Getter
 @Setter
+
+
 @NoArgsConstructor
 public class User {
     @Id
